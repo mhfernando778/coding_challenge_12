@@ -76,3 +76,33 @@ function removeInventoryItem(item) {
 // Test Cases: Adding new inventory items
 addInventoryItem("Product A");
 addInventoryItem("Product B");
+
+
+// Task 4: Business Customer Section – Handling Event Bubbling
+
+// Assume there is a parent container in the HTML with id "customerSection"
+const customerSection = document.getElementById("customerSection");
+
+// Create customer cards and append them to the customer section
+const customerCard1 = document.createElement("div");
+customerCard1.setAttribute("class", "customer-card");
+customerCard1.textContent = "Customer 1";
+customerSection.appendChild(customerCard1);
+
+const customerCard2 = document.createElement("div");
+customerCard2.setAttribute("class", "customer-card");
+customerCard2.textContent = "Customer 2";
+customerSection.appendChild(customerCard2);
+
+// Attach an event listener to the parent container to log when it is clicked
+customerSection.addEventListener("click", function() {
+    console.log("Customer section clicked");
+});
+
+// Attach event listeners to each customer card; use stopPropagation() to prevent the parent's event handler from firing
+document.querySelectorAll(".customer-card").forEach(card => {
+    card.addEventListener("click", function(event) {
+        console.log("Customer card clicked");
+        event.stopPropagation(); // Prevent event bubbling to the parent container
+    });
+});
